@@ -66,7 +66,7 @@ public:
 	{
 		std::cout << "Destuctor:\t" << this << std::endl;
 	}
-	double Distination()
+	double Distince()
 	{
 		d = sqrt(pow((x_2 - x_1), 2) + pow((y_2 - y_1), 2));
 		return d;
@@ -82,7 +82,7 @@ int main()
 {	
 
 	Point B(1, 33, 44, 33);
-	B.Distination();
+	B.Distince();
 	B.Print();
 	
 
