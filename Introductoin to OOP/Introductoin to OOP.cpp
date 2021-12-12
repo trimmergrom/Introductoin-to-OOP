@@ -48,11 +48,7 @@ public:
 	{
 		this-> y_2 = y;
 	}
-	/*Point()
-	{
-		x = y = 0;
-		std::cout << " DefaultConstructor:\t" << this << std::endl;
-	}*/
+	
 	Point(double x_a, double x_b, double y_a, double y_b)
 	{
 		this->x_1 = x_a;
@@ -66,29 +62,32 @@ public:
 	{
 		std::cout << "Destuctor:\t" << this << std::endl;
 	}
-	double Distince()
+	double Distance()
 	{
 		d = sqrt(pow((x_2 - x_1), 2) + pow((y_2 - y_1), 2));
 		return d;
 	}
 	void Print()const
 	{
-		std::cout << "xa = " << x_1 << " xb = " << x_2; /*<< std::endl*/;
-		std::cout << "\tya = " << y_1 << "\tyb = " << y_2 << " Dist = " << d << std::endl;
+		std::cout << "Xa = " << x_1 << " Xb = " << x_2;
+		std::cout << "\tYa = " << y_1 << "\tYb = " << y_2 << " Distance AB = " << d << std::endl;
 	}
 };
-#define struct_POINT
+
+double Distance(double x_1, double x_2, double y_1, double y_2)
+{
+	return sqrt(pow((x_2 - x_1), 2) + pow((y_2 - y_1), 2));	
+}
 int main()
 {	
-
 	Point B(1, 33, 44, 33);
-	B.Distince();
+	B.Distance();	
+	//std::cout << "Distance AB = " << B.Distince();
 	B.Print();
-	
-
-
-	//A.set_x(2);
-	//A.set_y(3);
-
-	//std::cout << A.get_x() << "\t" << A.get_y() << std::endl;
+	double x_a, x_b, y_a, y_b;
+	std::cout << "Enter Xa "; std::cin >> x_a; std::cout << std::endl;
+	std::cout << "Enter Ya "; std::cin >> y_a; std::cout << std::endl;
+	std::cout << "Enter Xb "; std::cin >> x_b; std::cout << std::endl;
+	std::cout << "Enter Yb "; std::cin >> y_b; std::cout << std::endl;
+	std::cout << "Distance AB = " << Distance(x_a, x_b, y_a, y_b);	
 }
