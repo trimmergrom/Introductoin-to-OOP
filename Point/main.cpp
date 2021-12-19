@@ -40,12 +40,12 @@ public:
 		this->y = y;
 		cout << "Constructor:\t" << this << endl;
 	}
-	Point(const Point& other)
+	/*Point(const Point& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
 		cout << "Copyconstructor: " << this << endl;
-	}
+	}*/
 	~Point()
 	{
 		cout << "Destructor:\t" << this << endl;
@@ -190,12 +190,12 @@ void main()
 
 	Point A(2, 3);
 	Point B(7, 8);
-	/*Point C = A + B;
+	Point C = A + B;
 	C.print();
 	A += B;
 	A.print();
 	C++;
-	C.print();*/
+	C.print();
 	A = B++;
 	A.print();
 	B.print();
