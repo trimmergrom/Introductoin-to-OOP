@@ -264,5 +264,6 @@ int main()
     std::cout << "B = "; B.print(); B.to_proper(); std::cout << "B.to_proper = ";  B.print_1();
     std::cout << "A = "; A.print_1(); std::cout << "A.to_improper = ";  A.to_improper(); A.print();
     std::cout << "A.reduce = "; A.reduce(); A.print();
+    std::cout << "=======================================" << std::endl;
     return 0;
 } 
