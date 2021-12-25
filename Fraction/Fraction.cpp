@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <cmath>
 
 class Fraction
 {
@@ -54,6 +55,12 @@ public:
         this->b = b;
        //std::cout << "Constructor_1\t" << this << std::endl;
     }
+    Fraction(const Fraction& other)
+	{
+		this->a = other.a;
+		this->b = other.b;
+		//std::cout << "Copyconstructor: " << this << std::endl;
+	}
     ~Fraction()
     {
         //std::cout << "Destructor\t" << this << std::endl;
@@ -70,20 +77,21 @@ public:
 
     Fraction& reduce()
     {
-        int a_gcf = this->a; int b_gcf = this->b;
+        int a_gcf = (this->a); unsigned int b_gcf = this->b;
         while (a_gcf != 0 && b_gcf != 0)
         {
-            if (a_gcf > b_gcf) { a_gcf = a_gcf % b_gcf; }
-            else { b_gcf = b_gcf % a_gcf; }
+            if (abs(a_gcf) > b_gcf) { a_gcf = abs(a_gcf) % b_gcf; }
+            else { b_gcf = b_gcf % abs(a_gcf); }
         }
         int gcf = a_gcf + b_gcf;
-        this->a = this->a / gcf;
+        if (this->a < 0) { this->a = -(abs(this->a) / gcf); }
+        else { this->a = this->a / gcf; }
         this->b = this->b / gcf;        
         return  *this;
     }
     Fraction& to_proper()
     {        
-        this->A = this->a / this->b;
+        this->A = (int)this->a / this->b;
         this->a = this->a - this->A * this->b;
         return *this;
     }
@@ -92,42 +100,42 @@ public:
         this->a = this->A * this->b + this->a;
         return *this;
     }
-    bool operator>(Fraction& other)
+    bool operator>(const Fraction& other)
     {        
         int comp_1 = this->a * other.b;
         int comp_2 = this->b * other.a;
         if (comp_1 > comp_2) { return  true; }
         else return false;        
     }
-    bool operator<(Fraction& other)
+    bool operator<(const Fraction& other)
     {
         int comp_1 = this->a * other.b;
         int comp_2 = this->b * other.a;
         if (comp_1 < comp_2) { return true; }
         else return false;
     }
-    bool operator<=(Fraction& other)
+    bool operator<=(const Fraction& other)
     {
         int comp_1 = this->a * other.b;
         int comp_2 = this->b * other.a;
         if (comp_1 <= comp_2) { return true; }
         else return false;
     }
-    bool operator>=(Fraction& other)
+    bool operator>=(const Fraction& other)
     {
         int comp_1 = this->a * other.b;
         int comp_2 = this->b * other.a;
         if (comp_1 >= comp_2) { return true; }
         else return false;
     }
-    bool operator==(Fraction& other)
+    bool operator==(const Fraction& other)
     {
         int comp_1 = this->a * other.b;
         int comp_2 = this->b * other.a;
         if (comp_1 == comp_2) { return true; }
         else return false;
     }
-    bool operator!=(Fraction& other)
+    bool operator!=(const Fraction& other)
     {
         int comp_1 = this->a * other.b;
         int comp_2 = this->b * other.a;
@@ -175,7 +183,20 @@ public:
         this->b *= other.a;
         return *this;
     }
-};
+}C, B, E, G;
+    bool Operator_great(const Fraction& left, const Fraction& rigth)
+    {
+        if (left.get_b() == rigth.get_b())
+        {
+            if (left.get_a() > rigth.get_b()) { return true; }
+            else { return false; }
+        }
+        if (left.get_b() != rigth.get_b())
+        {
+            if (left.get_a() * rigth.get_b() > rigth.get_a() * left.get_b()) { return true; }
+            else { return false; }
+        }
+    }
   Fraction operator+(const Fraction& left, const Fraction& rigth)
     {
        Fraction result;
@@ -227,43 +248,45 @@ int main()
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD coord;
     SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &coord);
-    Fraction C(2, 7); std::cout << "C = "; C.print();
-    Fraction D(4, 7); std::cout << "D = "; D.print();    
-    std::cout << "C + D = "; (C + D).print();
+    bool result_1;
+    Fraction D(9, 12); std::cout << "D = "; D.print();   
+    C = B = E = G = Fraction(3, 8); std::cout << "C = B = E = G = "; C.print();
+    Fraction A;
+    std::cout << "=============================" << std::endl;
+    A = C + D; 
+    std::cout << "C + D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = C - D;
+    std::cout << "C - D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = C * D;
+    std::cout << "C * D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = C / D;
+    std::cout << "C / D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = (C += D);
+    std::cout << "C += D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = (B -= D);
+    std::cout << "B -= D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = (E *= D);
+    std::cout << "E *= D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+    A = (G /= D);
+    std::cout << "G /= D = "; A.print(); A.reduce(); A.print();
+    std::cout << "=============================" << std::endl;
+
+
     std::cout << "=======================================" << std::endl;
-    Fraction E(2, 7); std::cout << "E = "; E.print();
-    Fraction F(4, 7); std::cout << "F = "; F.print();
-    std::cout << "E += F = "; (E += F).print();
+   
+    Fraction K(4, 3, 5);
+    Fraction L(23, 5);
+    std::cout << "L = "; L.print(); L.to_proper(); std::cout << "L.to_proper = ";  L.print_1();
     std::cout << "=======================================" << std::endl;
-    Fraction G(2, 7); std::cout << "G = "; G.print();
-    Fraction K(4, 5); std::cout << "K = "; K.print();
-    std::cout << "G - K = "; (G - K).print();
-    std::cout << "=======================================" << std::endl;
-    Fraction L(2, 7); std::cout << "L = "; L.print();
-    Fraction M(4, 5); std::cout << "M = "; M.print();   
-    std::cout << "L -= M = "; (L -= M).print();
-    std::cout << "=======================================" << std::endl;
-    Fraction P(2, 7); std::cout << "P = "; P.print();
-    Fraction R(4, 5); std::cout << "R = "; R.print();
-    std::cout << "P * R = "; (P * R).print();
-    std::cout << "=======================================" << std::endl;
-    Fraction S(2, 7); std::cout << "S = "; S.print();
-    Fraction T(4, 5); std::cout << "T = "; T.print();
-    std::cout << "S *= T = "; (S *= T).print();
-    std::cout << "=======================================" << std::endl;
-    Fraction Q(2, 7); std::cout << "Q = "; Q.print();
-    Fraction Z(4, 5); std::cout << "Z = "; Z.print();   
-    std::cout << "Q / Z = "; (Q / Z).print();
-    std::cout << "=======================================" << std::endl;
-    Fraction X(2, 7); std::cout << "X = "; X.print();
-    Fraction Y(4, 5); std::cout << "Y = "; Y.print();   
-    std::cout << "X /= Y = "; (X /= Y).print();
-    std::cout << "=======================================" << std::endl;    
-    Fraction A(24, 12, 18);
-    Fraction B(23, 5);
-    std::cout << "B = "; B.print(); B.to_proper(); std::cout << "B.to_proper = ";  B.print_1();
-    std::cout << "A = "; A.print_1(); std::cout << "A.to_improper = ";  A.to_improper(); A.print();
-    std::cout << "A.reduce = "; A.reduce(); A.print();
-    std::cout << "=======================================" << std::endl;
+    std::cout << "K = "; K.print_1(); std::cout << "K.to_improper = ";  K.to_improper(); K.print();
+    
+    
     return 0;
 } 
