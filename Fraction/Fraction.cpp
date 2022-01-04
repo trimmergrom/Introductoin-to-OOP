@@ -184,19 +184,7 @@ public:
         return *this;
     }
 }C, B, E, G;
-    bool Operator_great(const Fraction& left, const Fraction& rigth)
-    {
-        if (left.get_b() == rigth.get_b())
-        {
-            if (left.get_a() > rigth.get_b()) { return true; }
-            else { return false; }
-        }
-        if (left.get_b() != rigth.get_b())
-        {
-            if (left.get_a() * rigth.get_b() > rigth.get_a() * left.get_b()) { return true; }
-            else { return false; }
-        }
-    }
+    
   Fraction operator+(const Fraction& left, const Fraction& rigth)
     {
        Fraction result;
@@ -283,10 +271,10 @@ int main()
    
     Fraction K(4, 3, 5);
     Fraction L(23, 5);
-    std::cout << "L = "; L.print(); L.to_proper(); std::cout << "L.to_proper = ";  L.print_1();
+    std::cout << "L = "; L.print(); L.to_proper(); std::cout << "L.to_proper = "; L.print_1();
     std::cout << "=======================================" << std::endl;
-    std::cout << "K = "; K.print_1(); std::cout << "K.to_improper = ";  K.to_improper(); K.print();
-    
+    std::cout << "K = "; K.print_1(); std::cout << "K.to_improper = "; K.to_improper(); K.print();
+    std::cout << (Fraction(1, 2) == Fraction(5, 10)) << std::endl;
     
     return 0;
 } 
