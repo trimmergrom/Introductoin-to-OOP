@@ -16,6 +16,7 @@ class Fraction
     int integer;
     int numerator;
     int denominator;
+    double decimal;
 public:
 
     int get_integer()const
@@ -30,6 +31,10 @@ public:
     {
         return denominator;
     }
+    double get_decimal()const
+    {
+        return decimal;
+    }
     void set_integer(int integer)
     {
         this->integer = integer;
@@ -42,6 +47,10 @@ public:
     {
         if (denominator <= 0)denominator = 1;
         this->denominator = denominator;
+    }
+    void set_decimal(double decimal)
+    {
+        this->decimal = decimal;
     }
     Fraction(int integer, int numerator, int denominator)
     {
@@ -68,6 +77,22 @@ public:
         this->denominator = 1;
 #ifdef DEBUG
         cout << "1ArgConstructor:\t" << this << endl;
+#endif // DEBUG
+    }
+    Fraction(double decimal)
+    {        
+        this->integer = (int)decimal;
+        int p = 0;        
+        double delta = decimal - (int)decimal;
+        while ((int)delta / delta < 0.99)
+        {
+            delta *= 10;
+            p++;
+        }
+        this->numerator = delta;
+        this->denominator = (pow(10, p));        
+#ifdef DEBUG
+        cout << "1ArgDcmConstructor:\t" << this << endl;
 #endif // DEBUG
     }
     Fraction(int numerator, int denominator)
@@ -213,6 +238,7 @@ Fraction operator/(Fraction left, Fraction rigth)
 }
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 {
+    //if (obj.get_decimal())cout << obj.get_decimal();
     if (obj.get_integer())cout << obj.get_integer();
     if (obj.get_numerator())
     {
@@ -225,9 +251,36 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 }
 std::istream& operator>>(std::istream& in, Fraction& obj)
 {
-    cout << "Enter integer:\t";  in >> obj.integer;
-    cout << "Enter numerator:\t";  in >> obj.numerator;
-    cout << "Enter denominator:\t";  in >> obj.denominator;
+        /*cout << "Enter decimal: "; in >> obj.decimal;
+        if (obj.decimal > 0) { return in; }
+        else
+        {
+        cout << "Enter integer:\t";  in >> obj.integer;
+        cout << "Enter numerator:\t";  in >> obj.numerator;
+        cout << "Enter denominator:\t";  in >> obj.denominator;
+    return in;
+        }    */
+    obj = Fraction();
+    const int SIZE = 256;
+    char buffer[SIZE] = {};
+    //in >> buffer;
+    in.getline(buffer, SIZE);
+    char delimiters[] = "/( )";
+    char* number[3] = {};//Save numbers out buffer
+    int n = 0; //coutn numbers out bufffer
+    for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+    {
+        number[n++] = pch;
+    }
+    switch (n)
+    {
+    case 1: obj.set_integer(atoi(number[0])); break;
+    case 2: obj.set_numerator(atoi(number[0]));
+            obj.set_denominator(atoi(number[1])); break;
+    case 3: obj.set_integer(atoi(number[0]));
+            obj.set_numerator(atoi(number[1]));
+            obj.set_denominator(atoi(number[2])); break;
+    }
     return in;
 }
 Fraction operator+(const Fraction& left, const Fraction& rigth)
@@ -284,19 +337,32 @@ int main()
     COORD coord;
     SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &coord);
 
-    Fraction A(2, 3, 4);
+
     Fraction B(3, 4, 5);
     Fraction T(3, 4);
-    Fraction K;    
+    Fraction K;
+    Fraction R;
+    Fraction S(3.18);
     
-    cout << "Enter K = " << endl; std::cin >> K;
-    cout << K << endl;
-    cout << "Fraction to decimal: ";
-    double b = (double)K;
-    cout << b << endl;
-    Fraction F(dcm_to_frc(b));
+    double decimal;
+    
+    
+    
+    cout << "Enter K = " << endl; cin >> K;
+    //cout << K << endl;
+    
+    cout << K;
+    R = K;
+    //double b = (double)K;
+    //cout << b << endl;
+    //Fraction A(dcm_to_frc(b));
     cout << "Decimal to Fraction: ";
-    cout << F << endl;  
+    cout << R << endl;
+    cout << "\n--------------------Decimal----------------------------------\n";
+    cout << "decimal to fraction: ";
+    S.print();
+    cout << S << endl;
+    
     
     cout << "\n--------------------Postfix----------------------------------\n";
     cout << "B = " << B << endl;
