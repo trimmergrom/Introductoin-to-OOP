@@ -81,7 +81,7 @@ public:
     }
     Fraction(double decimal)
     {        
-        this->integer = (int)decimal;
+        /*this->integer = (int)decimal;
         int p = 0;        
         double delta = decimal - (int)decimal;
         while ((int)delta / delta < 0.99)
@@ -90,7 +90,14 @@ public:
             p++;
         }
         this->numerator = delta;
-        this->denominator = (pow(10, p));        
+        this->denominator = (pow(10, p));*/
+        decimal += 1e-11;
+        integer = decimal;
+        decimal -= integer;
+        denominator = 1e+9;
+        numerator = decimal * denominator;
+        reduce();
+
 #ifdef DEBUG
         cout << "1ArgDcmConstructor:\t" << this << endl;
 #endif // DEBUG
@@ -220,7 +227,7 @@ public:
         else if (integer == 0)cout << 0;
         cout << endl;
     }
-    friend std::istream& operator>>(std::istream&, Fraction&);
+    //friend std::istream& operator>>(std::istream&, Fraction&);
 };
 
 Fraction operator*(Fraction left, Fraction rigth)
@@ -251,7 +258,14 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 }
 std::istream& operator>>(std::istream& in, Fraction& obj)
 {
-        /*cout << "Enter decimal: "; in >> obj.decimal;
+    /*int integer, numerator, denominator;
+    in >> integer >> numerator >> denominator;
+    obj.set_integer(integer);
+    obj.set_numerator(numerator);
+    obj.set_denominator(denominator);
+    return in;*/
+
+    /*cout << "Enter decimal: "; in >> obj.decimal;
         if (obj.decimal > 0) { return in; }
         else
         {
@@ -342,7 +356,7 @@ int main()
     Fraction T(3, 4);
     Fraction K;
     Fraction R;
-    Fraction S(3.18);
+    Fraction S(2.76);
     
     double decimal;
     
