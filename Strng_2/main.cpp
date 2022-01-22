@@ -26,24 +26,21 @@ public:
 	{
 		return size;
 	}
-	explicit String(int size = 80)
-		:size(size), str(new char[size]{})
+	explicit String(int size = 80):size(size), str(new char[size]{})
 	{
 		//Благодаря принимаемому параметру size мы можем создавать строки заданного размера
 		//this->size = size;
 		//this->str = new char[size] {};
 		cout << "DefaultConst:\t" << this << endl;
 	}
-	String(const char* str)
-		:size(strlen(str) + 1), str(new char[size]{})
+	String(const char* str):String(strlen(str)+1)		
 	{
 		cout << sizeof(str) << endl;
 		
 		for (int i = 0; i < size; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const String& other)
-		:size(other.size), str(new char[size]{})
+	String(const String& other):String(other.str)		
 	{
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:" << this << endl;
@@ -61,9 +58,6 @@ public:
 	{
 		if (this == &other)return *this;
 
-		int a = 2;
-		int b = 3;
-		a = b;
 		delete[] this->str;
 		//Глубокое копирование (Deep copy)
 		this->size = other.size;
