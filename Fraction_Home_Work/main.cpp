@@ -356,7 +356,7 @@ int main()
     Fraction T(3, 4);
     Fraction K;
     Fraction R;
-    Fraction S(2.76);
+    Fraction S(2.89);
 
     double decimal;
 
@@ -366,15 +366,11 @@ int main()
     //cout << K << endl;
 
     cout << K;
-    R = K;
-    //double b = (double)K;
-    //cout << b << endl;
-    //Fraction A(dcm_to_frc(b));
-    cout << "Decimal to Fraction: ";
-    cout << R << endl;
+   
+    
     cout << "\n--------------------Decimal----------------------------------\n";
     cout << "decimal to fraction: ";
-    S.print();
+   // S.print();
     cout << S << endl;
 
 
