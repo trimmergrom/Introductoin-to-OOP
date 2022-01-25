@@ -1,9 +1,4 @@
-
-// Class Declaration End
-
-//Class Definition
 #include"String.h"
-//Class Definition End
 
 //#define NULL_TERMINATED_LINES
 //#define BASE_CHECK
@@ -79,8 +74,6 @@ str1[2] = 0;*/
 	String str4(); //Не вызывется констр по умолчанию - не создается никакиз объектов
 	//Объявлям функцию, которая не принимает никаких параметров и возвращает string
 	String str5{}; //явный вызов конструктора по умолчанию
-
-
 }
 
 int StringLength(const char* str)
