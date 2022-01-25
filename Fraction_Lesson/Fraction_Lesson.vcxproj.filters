@@ -18,8 +18,5 @@
     <ClCompile Include="Fraction_Lesson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Fraction_Home_Work\Fraction_Home_Work.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
