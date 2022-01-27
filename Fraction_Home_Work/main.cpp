@@ -80,9 +80,9 @@ public:
 #endif // DEBUG
     }
     Fraction(double decimal)
-    {        
+    {
         /*this->integer = (int)decimal;
-        int p = 0;        
+        int p = 0;
         double delta = decimal - (int)decimal;
         while ((int)delta / delta < 0.99)
         {
@@ -290,10 +290,10 @@ std::istream& operator>>(std::istream& in, Fraction& obj)
     {
     case 1: obj.set_integer(atoi(number[0])); break;
     case 2: obj.set_numerator(atoi(number[0]));
-            obj.set_denominator(atoi(number[1])); break;
+        obj.set_denominator(atoi(number[1])); break;
     case 3: obj.set_integer(atoi(number[0]));
-            obj.set_numerator(atoi(number[1]));
-            obj.set_denominator(atoi(number[2])); break;
+        obj.set_numerator(atoi(number[1]));
+        obj.set_denominator(atoi(number[2])); break;
     }
     return in;
 }
@@ -357,14 +357,14 @@ int main()
     Fraction K;
     Fraction R;
     Fraction S(2.76);
-    
+
     double decimal;
-    
-    
-    
+
+
+
     cout << "Enter K = " << endl; cin >> K;
     //cout << K << endl;
-    
+
     cout << K;
     R = K;
     //double b = (double)K;
@@ -376,8 +376,8 @@ int main()
     cout << "decimal to fraction: ";
     S.print();
     cout << S << endl;
-    
-    
+
+
     cout << "\n--------------------Postfix----------------------------------\n";
     cout << "B = " << B << endl;
     cout << "B++ = " << B++ << endl;
