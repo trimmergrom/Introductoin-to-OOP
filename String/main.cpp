@@ -5,7 +5,10 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+class String;
 int StringLength(const char* str);
+String operator+(const String& left, const String& rigth);
+
 
 //#define NULL_TERMINATED_LINES
 //#define BASE_CHEK
@@ -15,11 +18,15 @@ class String
 	int size;
 	char* str;
 public:
-	int get_size()
+	int get_size()const
 	{
 		return size;
 	}
-	char* get_str()const
+	const char* get_str()const
+	{
+		return str;
+	}
+	char* get_str()
 	{
 		return str;
 	}
@@ -68,6 +75,15 @@ public:
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
 	}
+	const char& operator[](int i)const
+	{
+		return str[i];
+	}
+	char& operator[](int i)
+	{
+		return str[i];
+	}
+	
 	/*String operator+(const String& other)
 	{
 		String result(size - 1 + other.size);
@@ -90,12 +106,27 @@ public:
 		}
 		return *this;
 	}*/
+	String& operator+=(const String& other)
+	{
+		return *this = *this + other;
+	}
 	void print()const
 	{
 		cout << "Size:\t" << size << endl;
 		cout << "Str:\t" << str << endl;
 	}
 };
+String operator+(const String& left, const String& rigth)
+{
+	String result(left.get_size() + rigth.get_size() - 1);
+	for (int i = 0; i < left.get_size(); i++)
+		result[i] = left[i];
+	//result.get_str()[i] = left.get_str()[i];
+	for (int i = 0; i < rigth.get_size(); i++)
+		result[left.get_size() - 1 + i] = rigth[i];
+	//result.get_str()[left.get_size() - 1 + i] = rigth.get_str()[i];
+	return result;
+}
 
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {

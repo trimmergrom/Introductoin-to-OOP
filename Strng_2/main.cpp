@@ -105,7 +105,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 
 //#define NULL_TERMINATED_LINES
 //#define BASE_CHECK
-//#define OPERATOR_PLUS_CHECK
+#define OPERATOR_PLUS_CHECK
 
 void main()
 {
