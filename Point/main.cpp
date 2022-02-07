@@ -1,6 +1,8 @@
 #include<iostream>
 #include "Point.h"
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
 
 
 //#define STRUCT_POINT
