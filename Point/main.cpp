@@ -1,122 +1,12 @@
 #include<iostream>
+#include "Point.h"
 using namespace std;
 
-#define tab "\t"
-
-class Point
-{
-	double x;
-	double y;
-public:
-	double get_x()const
-	{
-		return x;
-	}
-	double get_y()const
-	{
-		return y;
-	}
-	void set_x(double x)
-	{
-		this->x = x;//Encapsulation DONE
-		//this - это указатель на объект, для которого вызывается метод
-		//Изнутри метода невозможно узнать имя объекта, для которого он вызывается
-		//НО всегда можно узнать адрес этого объекта.
-	}
-	void set_y(double y)
-	{
-		this->y = y;
-	}
-
-	//					Constructors:
-	/*Point()
-	{
-		x = y = 0;
-		cout << "DefaultConstructor:\t" << this << endl;
-	}*/
-	Point(double x = 0, double y = 0)
-	{
-		this->x = x;
-		this->y = y;
-		cout << "Constructor:\t" << this << endl;
-	}
-	/*Point(const Point& other)
-	{
-		this->x = other.x;
-		this->y = other.y;
-		cout << "Copyconstructor: " << this << endl;
-	}*/
-	~Point()
-	{
-		cout << "Destructor:\t" << this << endl;
-	}
-	//       Operators:
-	Point& operator=(const Point& other)
-	{
-		this->x = other.x;
-		this->y = other.y;
-		cout << "CopyAssignment:\t" << this << endl;
-		return *this;
-	}
-	Point& operator+=(const Point& other)
-	{
-		this->x += other.x;
-		this->y += other.y;
-		return *this;
-
-	}
-	Point& operator++() //Prefix
-	{
-		x++;
-		y++;
-		return *this;
-	}
-	Point operator++(int)
-	{
-		Point old = *this;
-		x++;
-		y++;
-		return old;
-	}
-	Point& operator()(double x, double y)
-	{
-		set_x(x);
-		set_y(y);
-		return *this;
-	}
-
-	//				Methods:
-	double distance(const Point& other)const
-	{
-		double x_distance = this->x - other.x;
-		double y_distance = this->y - other.y;
-		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
-		return distance;
-	}
-	void print()const
-	{
-		cout << "X = " << x << "\tY = " << y << endl;
-	}
-};
-Point operator+(const Point& left, const Point& rigth)
-{
-	Point result;
-	result.set_x(left.get_x() + rigth.get_x());
-	result.set_y(left.get_y() + rigth.get_y());
-	return result;
-}
-double distance(const Point& A, const Point& B)
-{
-	double x_distance = A.get_x() - B.get_x();
-	double y_distance = A.get_y() - B.get_y();
-	return sqrt(pow(x_distance, 2) + pow(y_distance, 2));
-}
 
 //#define STRUCT_POINT
 //#define CONSTRUCTORS_CHECK
 //#define DISTANCE_CHECK
 //#define ASSIGMENT_CHECK
-
 void main()
 {
 	setlocale(LC_ALL, "");
