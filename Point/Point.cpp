@@ -102,3 +102,9 @@ double distance(const Point& A, const Point& B)
 	double y_distance = A.get_y() - B.get_y();
 	return sqrt(pow(x_distance, 2) + pow(y_distance, 2));
 }
+std::ostream& operator<<(std::ostream& os, const Point& obj)
+{
+	cout << obj.get_x();
+	cout << obj.get_y();	
+	return os;
+}

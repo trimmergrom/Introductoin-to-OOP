@@ -35,3 +35,4 @@ public:
 };
 Point operator+(const Point& left, const Point& rigth);
 double distance(const Point& A, const Point& B);
+std::ostream& operator<<(std::ostream& os, const Point& obj);
